@@ -13,8 +13,17 @@ $('#EquisEditar').click(()=>{
 
 $('#ToastEquisCrearUsuario').click(()=>{
     $('#ToastCrearUsuario').css('display', 'none');
-})
+});
 
+// $('.toast-equis').click(()=>{
+//     $('.toast').hide();
+// })
+
+function cerrarToast(){
+
+    $('.toast').css('display', 'none');
+    
+}
 function getData($data){
     var variables = $data.split(", ");
     
@@ -36,19 +45,24 @@ function getData($data){
 function getTarjetas(){
     $.ajax({
         url: './getTarjetas.php',
-        
-        beforeSend: function() {
-            $('#Layout').html("<p>CARGANDO</p>");
-        }, 
-        
-        succes: function(respuesta){
-            console.log(respuesta);
+       
+        success: function(respuesta){
+            
             $('#Layout').html(respuesta);
-            ;
+        
         }
     });
 }
 
-// window.onload = function(){
-//     getTarjetas();
-// };
+$("#IniciarSesion").click(()=>{
+    $("#Ingresar").css('display', "flex");
+});
+
+$("#EquisIngresar").click(()=>{
+    $("#Ingresar").css('display', "none");
+});
+
+window.onload = function(){
+    getTarjetas();
+    
+};

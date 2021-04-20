@@ -49,7 +49,6 @@
     $rol = $_POST['rol'];
     $newPass = $_POST['passwordnu2'];
 
-
     if(empty($username) || empty($password)){
         echo 'error, 500, Debe Identificarse Primero';
     }else{

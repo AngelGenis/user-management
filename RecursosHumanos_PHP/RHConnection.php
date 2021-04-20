@@ -162,6 +162,7 @@
     
 
   }
+  // $conn = new RHConnection("https://localhost:44386");
 
   // GETUSERSINFO
   // $usersInfo = $conn->getUsersInfo();
@@ -171,8 +172,18 @@
 
   // GETUSERS
   // $users = $conn->getUsers();
+ 
+
   // foreach($users->data as &$user){
   //   echo($user->getUsername());
+    
+  //   echo($user->getContraseña());
+  //   echo "<br>";
+
+
+  //   echo md5("12345678c");
+
+
   // }
 
   // SETUSER

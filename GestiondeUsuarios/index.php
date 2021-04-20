@@ -19,7 +19,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-       
+        var UsuarioLogueado="";
+        var ContraseñaUsuarioLogueado ="";
+
         function enviar_ajax(){	
             $.ajax({
             type: 'POST',
@@ -39,8 +41,9 @@
                 if(status == 'Success'){
                     $('#TextoError').html("exito");
                     $('#Registro').hide();
+                    getTarjetas();
 
-                    $( ".contenedor-principal" ).append( `<div class="toast success showup" id="ToastCrearUsuario">
+                    $( ".contenedor-principal" ).append( `<div class="toast success showup" onclick="cerrarToast()">
                         <div class="toast-header">
                             <p>${status}</p>
                             <div class="equis toast-equis" id="ToastEquisCrearUsuario">
@@ -72,7 +75,6 @@
                 $('#TextoError2').html("Cargando...");
             }, 
             success: function(respuesta) {
-                console.log(respuesta);
                 var res =  respuesta.split(",");
                 var status = res[0];
                 var code = res[1]
@@ -83,26 +85,48 @@
                     $('#TextoError2').html("exito");
                     
                     $('#Editar').hide();
-                    location.reload();
-                   
-                    // $(".contenedor-principal").append( `<div class="toast success showup" id="ToastCrearUsuario">
-                    //     <div class="toast-header">
-                    //         <p>${status}</p>
-                    //         <div class="equis toast-equis" id="ToastEquisCrearUsuario">
-                    //             <img src="./images/equis.svg" alt="equis">
-                    //         </div>
-                    //     </div>
-                    //     <div class="toast-body">
-                    //         <p> codigo ${code} </p>
-                    //         <p>${message}</p>
-                    //     </div>
-                    // </div>`);
+                    getTarjetas();
+
+                    $(".contenedor-principal").append( `<div class="toast success showup" onclick="cerrarToast()">
+                        <div class="toast-header">
+                            <p>${status}</p>
+                            <div class="equis toast-equis">
+                                <img src="./images/equis.svg" alt="equis">
+                            </div>
+                        </div>
+                        <div class="toast-body">
+                            <p> codigo ${code} </p>
+                            <p>${message}</p>
+                        </div>
+                    </div>`);
 
                 }else{
                     $("#TextoError2").css('color','red');
                     $('#TextoError2').html(message);           
                 }
                
+            }
+            });
+        }
+
+        function ingresar_ajax(){	
+            $.ajax({
+            type: 'POST',
+            url: './ingresar.php',
+            data: $('#form3').serialize(),
+            beforeSend: function() {
+                $("#TextoError3").css('color','blue');
+                $('#TextoError3').html("Cargando...");
+
+            }, 
+            success: function(respuesta) {
+                var res =  respuesta.split(",");
+                var mensaje = res[0];
+                UsuarioLogueado = res[1]
+                ContraseñaUsuarioLogueado = res[2];
+
+                $("#TextoError3").css('color','red');
+                $('#TextoError3').html(mensaje); 
             }
             });
         }
@@ -116,30 +140,20 @@
         <div class="registro" id="Registro">
                 <div class="gradiente"></div>
                 <div class="contenedor-registro">
-                    
-                    <img id="EquisRegistro" class="equis" src='./images/equis.svg' alt="equis" />
-                
-              
+                    <img id="EquisRegistro" class="equis" src='./images/equis.svg' alt="equis" />            
                     <h2>Registrar Usuario</h2>
-                    
-
                     <form onsubmit="enviar_ajax(); return false" id="form1"  class="campos">
                         <label for="username">Usuario</label><br>
                         <input type="text" name="username" placeholder="Angel Genis"><br>
-
                         <label for="password">Contraseña</label><br>
                         <input type="password" name="password" placeholder="***********">
                         <br>
-
                         <p>Datos del nuevo usuario</p>
-                        
                         <label for="name">Nombre</label><br>
                         <input type="text" name="name" placeholder="Angel Genis"><br>
-
                         <label for="email">Correo</label><br>
                         <input type="text" name="email" placeholder="angel.genis98@gmail.com">
                         <br>
-
                         <label for="phone">Telefono</label><br>
                         <input type="text" name="phone" placeholder="7353645874"><br>
 
@@ -153,10 +167,8 @@
                         <input type="submit" name="registrar" value="REGISTRAR" class="contenedor-boton-agregar">
                     
                     </form>
-
                 </div>
         </div>
-
 
 
         <div class="registro" id="Editar">
@@ -208,17 +220,16 @@
                 <img class="equis" src="images/equis.svg" alt="equis" id="EquisIngresar" />
                 <h2>Iniciar Sesión</h2>
 
-                <form method="post" class="campos" action="">
+                <form onsubmit="ingresar_ajax(); return false" class="campos" id="form3">
                     <label for="username">Email o nombre de usuario</label><br>
                     <input type="text" id="fname" name="username" placeholder="Angel Genis"><br>
 
                     <label for="password">Contraseña</label><br>
                     <input type="password" name="password" placeholder="************"><br>
 
-
+                    <label for="error" class="texto-error" id="TextoError3"></label>
                     <input type="submit" name="login" value="INGRESAR" class="contenedor-boton-agregar boton-ingresar">
                 </form>
-
         </div>
     </div>
 
@@ -255,10 +266,10 @@
                     </div>
                 </div>
             </div>
-            <p class="iniciar-sesion-boton" id="IniciarSesion">Iniciar Sesión</p>
+            <!-- <p class="iniciar-sesion-boton" id="IniciarSesion">Iniciar Sesión</p>
             <div class="contenedor-perfil">
                 <p>AG</p>
-            </div>
+            </div> -->
         </div>
         <div class="body-body">
             <div class="contenedor-botones">
@@ -273,89 +284,7 @@
             
 
             <div class="layout" id="Layout">
-                <?php
-                
-                    // GETUSERS
-                    $usersInfo = $conn->getUsersInfo();
-                    $respuesta = json_encode($usersInfo);
-                    $parsed_json = json_decode($respuesta, true);
                     
-                    if($parsed_json['status'] == "Success"){
-                        
-                        ?>
-                        <!-- <div class="toast success" id="Toast1">
-                            <div class="toast-header">
-                                <p><?php echo $parsed_json['status']?></p>
-                                <div class="equis" id="ToastDatos">
-                                    <img src="./images/equis.svg" alt="equis">
-                                </div>
-                            </div>
-                            <div class="toast-body">
-                                <p> codigo <?php echo $parsed_json['code']?></p>
-                                <p><?php echo $parsed_json['message']?></p>
-                            </div>
-                        </div> -->
-                        <?php
-                            foreach($parsed_json['data'] as $value) {
-                        ?>
-
-                        <div class="tarjeta">
-                                <div class="header-tarjeta">
-                                    <p class="nombre"><?php echo $value['nombre']?></p>
-                                    
-                                    <div class="lapiz" onClick="getData('<?php echo $value['nombre']?>, <?php echo $value['correo']?>, <?php echo $value['telefono']?>, <?php echo $value['rol']?>')">
-                                        <!-- <a href="#updateUserInfo.php?id=<?php echo $value['nombre']?>" >
-                                            <img src="./images/lapizIcon.svg" alt="lapiz">
-                                        </a> -->
-
-                                        <img class="lapizicon" src="./images/lapizIcon.svg" alt="lapiz">
-                                    </div>
-                                </div>
-                                <div class="body-tarjeta">
-                                    <div class="campos2">
-                                        <p>Correo</p>
-                                        <p><?php echo $value['correo']?></p>
-                                       
-                                        <p>Telefono</p>
-                                        <p><?php echo $value['telefono']?></p>
-                                    </div>
-                                    
-                                </div>
-                                <div class="bottom-tarjeta">
-                                    <p class="cargo">
-                                        <?php 
-                                            if($value['rol'] == 'rh'){
-                                                echo "Relaciones Humanas";
-                                            }else{
-                                                echo $value['rol'];
-                                            }?></p>
-                                </div>
-                                
-                            </div> 
-                        <?php 
-                        } //Cierre del For
-                    }else{
-                        ?>
-                            <div class="toast error" id="ToastDatos">
-                                <div class="toast-header">
-                                    <p><?php echo $parsed_json['status']?></p>
-                                    <div class="equis toast-equis" id="ToastEquisDatos">
-                                        <img src="./images/equis.svg" alt="equis">
-                                    </div>
-                                </div>
-                                <div class="toast-body">
-                                    <p> codigo <?php echo $parsed_json['code']?></p>
-                                    <p><?php echo $parsed_json['message']?></p>
-                                </div>
-                            </div>
-                        <?php
-                    }
-                    
-                   
-
-               ?>
-                        
-                     
             </div>
         </div>
     </div>
