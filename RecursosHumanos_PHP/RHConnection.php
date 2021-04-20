@@ -89,10 +89,9 @@
       $curl = curl_init();
 
       $json = json_encode($userInfoJSON, true);
-      echo($json);
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://localhost:5001/api/UserInfo?user='. $user .'&pass='. $pass .'&searchedUser='. $searchedUser .'&userInfoJSON='. urlencode($json),
+        CURLOPT_URL => $this->REST_URL .'/api/UserInfo?user='. $user .'&pass='. $pass .'&searchedUser='. $searchedUser .'&userInfoJSON='. urlencode($json),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_SSL_VERIFYPEER => false,
@@ -102,13 +101,12 @@
 
       $response = curl_exec($curl);
       if( curl_errno($curl) ) {
-        echo curl_error($curl);
+        return new RespuestaSetUserInfo("Library ".curl_errno($curl), curl_error($curl), "Error", new UserInfo());
       } 
       curl_close($curl);
       $result = json_decode($response,true);
-
-      echo($response);
       
+      return new RespuestaSetUserInfo($result["code"], $result["message"], $result["status"], $result["data"]);
 
     } 
 
@@ -135,8 +133,6 @@
       curl_close($curl);
       $result = json_decode($response,true);
 
-      echo($response);
-
       return new RespuestaUpdateUser($result["code"], $result["message"], $result["status"], $result["data"]);
     } 
 
@@ -144,10 +140,9 @@
       $curl = curl_init();
 
       $json = json_encode($userInfoJSON, true);
-      echo($json);
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://localhost:5001/api/UserInfo/'. $searchedUser .'?user='. $user .'&pass='. $pass .'&userInfoJSON='. urlencode($json),
+        CURLOPT_URL => $this->REST_URL . '/api/UserInfo/'. $searchedUser .'?user='. $user .'&pass='. $pass .'&userInfoJSON='. urlencode($json),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => 'PUT',
         CURLOPT_SSL_VERIFYPEER => false,
@@ -157,18 +152,19 @@
 
       $response = curl_exec($curl);
       if( curl_errno($curl) ) {
-        echo curl_error($curl);
+        return new RespuestaUpdateUserInfo("Library ".curl_errno($curl), curl_error($curl), "Error", "");
       } 
       curl_close($curl);
       $result = json_decode($response,true);
 
-      echo($response);
+      return new RespuestaUpdateUserInfo($result["code"], $result["message"], $result["status"], $result["data"]);
     }
     
 
   }
 
- 
+  $conn = new RHConnection("https://localhost:5001");
+
   // GETUSERSINFO
   // $usersInfo = $conn->getUsersInfo();
   // foreach($usersInfo->data as &$userInfo){
@@ -184,17 +180,18 @@
   // SETUSER
   //$conn->setUser("pruebas3", "12345678c", "test", "123456789j");
   
-  // $conn = new RHConnection("https://localhost:44386");
-  // // SETUSERINFO
+  // SETUSERINFO
+  // $nuevoUserInfo = new UserInfo("john@doe.com", "John Doe", "ventas", "2281004088"); 
+  // $resp = $conn->setUserInfo("pruebas3", "12345678c", "joaquin", $nuevoUserInfo);
+  // echo $resp->message;
 
-  // $nuevoUserInfo = new UserInfo("john@doe.com", "John Doe", "rh", "2281004088"); 
-  // $conn->setUserInfo("pruebas3", "12345678c", "test", $nuevoUserInfo);
 
   // UPDATEUSER
   //$conn->updateUser("pruebas3", "12345678c", "test", "123456789j");
 
   // UPDATEUSERINFO
-  //$nuevoUserInfo = new UserInfo("john@doe.com", "John Doey", "ventas", "2281004088"); 
-  //$conn->updateUserInfo("pruebas3", "12345678c", "test", $nuevoUserInfo);
+  // $nuevoUserInfo = new UserInfo("john@doe.com", "Tyler Dunden", "ventas", "2281004088"); 
+  // $resp = $conn->updateUserInfo("pruebas3", "12345678c", "joaquin", $nuevoUserInfo);
+  // echo $resp->message;
 
 ?>
