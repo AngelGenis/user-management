@@ -14,3 +14,8 @@ $('#Lapiz').click(()=>{
 $('#EquisEditar').click(()=>{
     $('#Editar').fadeOut("fast");
 });
+
+$('#ToastEquisCrearUsuario').click(()=>{
+    $('#ToastCrearUsuario').css('display', 'none');
+})
+

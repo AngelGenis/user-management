@@ -162,8 +162,10 @@
     
 
   }
+  // $conn = new RHConnection("https://localhost:44386");
 
-  $conn = new RHConnection("https://localhost:5001");
+
+  // $conn = new RHConnection("https://localhost:5001");
 
   // GETUSERSINFO
   // $usersInfo = $conn->getUsersInfo();
@@ -181,8 +183,8 @@
   //$conn->setUser("pruebas3", "12345678c", "test", "123456789j");
   
   // SETUSERINFO
-  // $nuevoUserInfo = new UserInfo("john@doe.com", "John Doe", "ventas", "2281004088"); 
-  // $resp = $conn->setUserInfo("pruebas3", "12345678c", "joaquin", $nuevoUserInfo);
+  // $nuevoUserInfo = new UserInfo("aaa@doe.com", "aaa 2", "rh", "2281004088"); 
+  // $resp = $conn->setUserInfo("pruebas3", "12345678c", "aaa", $nuevoUserInfo);
   // echo $resp->message;
 
 

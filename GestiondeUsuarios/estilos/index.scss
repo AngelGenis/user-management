@@ -75,6 +75,67 @@ $negro: #4F4F4F;
         padding: 5px 10px;
     }
 }
+.registro{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    display: none;
+
+    .gradiente{
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        background: $gradient;
+        z-index: 99;
+        opacity: 30%;
+    }
+
+   
+
+    .contenedor-registro{
+        position: relative;
+        width: 400px;
+        background: white;
+        height: 700px;
+        border-radius: 20px;
+        z-index: 999;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 0;
+        
+
+    
+        .equis{
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            cursor:pointer;
+            padding: 5px;
+        }
+        h2{
+            font-size: 25px;
+            margin-top: -200px;
+
+        }
+        form{
+            .texto-error{
+                font-size: 10px;
+                color: red;
+            }
+
+        }
+        
+
+    }
+}
 .campos{
     width: 80%;
     height: 350px;
@@ -153,67 +214,7 @@ body{
         
 
 
-        .registro{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 0;
-            left: 0;
-            display: none;
         
-            .gradiente{
-                width: 100%;
-                position: absolute;
-                height: 100%;
-                background: $gradient;
-                z-index: 99;
-                opacity: 30%;
-            }
-
-           
-
-            .contenedor-registro{
-                position: relative;
-                width: 400px;
-                background: white;
-                height: 700px;
-                border-radius: 20px;
-                z-index: 999;
-                padding: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                padding-top: 0;
-                
-
-            
-                .equis{
-                    position: absolute;
-                    right: 15px;
-                    top: 15px;
-                    cursor:pointer;
-                    padding: 5px;
-                }
-                h2{
-                    font-size: 25px;
-                    margin-top: -200px;
-
-                }
-                form{
-                    .texto-error{
-                        font-size: 10px;
-                        color: red;
-                    }
-
-                }
-                
-
-            }
-        }
 
         .contenedor-principal-login{
             width: 100%;

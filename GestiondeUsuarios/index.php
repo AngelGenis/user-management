@@ -25,6 +25,11 @@
             type: 'POST',
             url: './process.php',
             data: $('#form1').serialize(),
+            beforeSend: function() {
+                $("#TextoError").css('color','blue');
+                $('#TextoError').html("Cargando...");
+
+            }, 
             success: function(respuesta) {
                 console.log(respuesta);
                 var res =  respuesta.split(",");
@@ -32,13 +37,10 @@
                 var code = res[1]
                 var message = res[2];
 
-            
-                console.log(status);
-
                 if(status == 'Success'){
-                    console.log("Hola");
                     $('#TextoError').html("exito");
                     $('#Registro').hide();
+
                     $( ".contenedor-principal" ).append( `<div class="toast success showup" id="ToastCrearUsuario">
                         <div class="toast-header">
                             <p>${status}</p>
@@ -53,21 +55,8 @@
                     </div>`);
 
                 }else{
-                    $('#TextoError').html(message);
-
-                    // $( ".contenedor-principal" ).append( `<div class="toast error" id="ToastDatos">
-                    //     <div class="toast-header">
-                    //         <p>${status}</p>
-                    //         <div class="equis toast-equis" id="ToastEquisDatos">
-                    //             <img src="./images/equis.svg" alt="equis">
-                    //         </div>
-                    //     </div>
-                    //     <div class="toast-body">
-                    //         <p> codigo ${code} </p>
-                    //         <p>${message}</p>
-                    //     </div>
-                    // </div>`);
-                    
+                    $("#TextoError").css('color','red');
+                    $('#TextoError').html(message);           
                 }
                
             }
