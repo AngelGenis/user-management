@@ -110,11 +110,11 @@
 
     } 
 
-    function updateUser($user, $pass, $newUser, $newPass){
+    function updateUser($user, $pass, $oldUser, $newUser, $newPass){
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => $this->REST_URL .'/api/User/'.$newUser.'?user='.$user.'&pass='. $pass.'&newPass='. $newPass,
+        CURLOPT_URL => $this->REST_URL .'/api/User/'.$oldUser.'?user='.$user.'&pass='. $pass.'&newUser='. $newUser.'&newPass='. $newPass,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -162,10 +162,6 @@
     
 
   }
-  // $conn = new RHConnection("https://localhost:44386");
-
-
-  // $conn = new RHConnection("https://localhost:5001");
 
   // GETUSERSINFO
   // $usersInfo = $conn->getUsersInfo();
@@ -183,13 +179,14 @@
   //$conn->setUser("pruebas3", "12345678c", "test", "123456789j");
   
   // SETUSERINFO
-  // $nuevoUserInfo = new UserInfo("aaa@doe.com", "aaa 2", "rh", "2281004088"); 
-  // $resp = $conn->setUserInfo("pruebas3", "12345678c", "aaa", $nuevoUserInfo);
+  // $nuevoUserInfo = new UserInfo("john@doe.com", "John Doe", "ventas", "2281004088"); 
+  // $resp = $conn->setUserInfo("pruebas3", "12345678c", "joaquin", $nuevoUserInfo);
   // echo $resp->message;
 
 
   // UPDATEUSER
-  //$conn->updateUser("pruebas3", "12345678c", "test", "123456789j");
+  //$resp = $conn->updateUser("pruebas3", "12345678c", 'pruebasx', "Emiliano", "123456789e");
+  //echo($resp->message);
 
   // UPDATEUSERINFO
   // $nuevoUserInfo = new UserInfo("john@doe.com", "Tyler Dunden", "ventas", "2281004088"); 

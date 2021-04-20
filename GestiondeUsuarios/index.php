@@ -19,8 +19,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
+       
         function enviar_ajax(){	
-
             $.ajax({
             type: 'POST',
             url: './process.php',
@@ -31,7 +31,6 @@
 
             }, 
             success: function(respuesta) {
-                console.log(respuesta);
                 var res =  respuesta.split(",");
                 var status = res[0];
                 var code = res[1]
@@ -63,6 +62,50 @@
             });
         }
 
+        function editar_ajax(){
+            $.ajax({
+            type: 'POST',
+            url: './editar.php',
+            data: $('#form2').serialize(),
+            beforeSend: function() {
+                $("#TextoError2").css('color','blue');
+                $('#TextoError2').html("Cargando...");
+            }, 
+            success: function(respuesta) {
+                console.log(respuesta);
+                var res =  respuesta.split(",");
+                var status = res[0];
+                var code = res[1]
+                var message = res[2];
+                $('#TextoError2').html("");
+
+                if(status == 'Success'){
+                    $('#TextoError2').html("exito");
+                    
+                    $('#Editar').hide();
+                    location.reload();
+                   
+                    // $(".contenedor-principal").append( `<div class="toast success showup" id="ToastCrearUsuario">
+                    //     <div class="toast-header">
+                    //         <p>${status}</p>
+                    //         <div class="equis toast-equis" id="ToastEquisCrearUsuario">
+                    //             <img src="./images/equis.svg" alt="equis">
+                    //         </div>
+                    //     </div>
+                    //     <div class="toast-body">
+                    //         <p> codigo ${code} </p>
+                    //         <p>${message}</p>
+                    //     </div>
+                    // </div>`);
+
+                }else{
+                    $("#TextoError2").css('color','red');
+                    $('#TextoError2').html(message);           
+                }
+               
+            }
+            });
+        }
 
     </script>
 </head>
@@ -103,14 +146,11 @@
                         <label for="rol">Rol</label><br>
                         <input type="text" name="rol" placeholder="Ventas"><br>
 
-                        <label for="passwordnu">Contraseña</label><br>
-                        <input type="password" name="passwordnu" placeholder="************"><br>
-
-                        <label for="passwordnu2">Repetir Contraseña</label><br>
+                        <label for="passwordnu2">Nueva Contraseña</label><br>
                         <input type="password" name="passwordnu2" placeholder="************"><br>
 
                         <label for="error" class="texto-error" id="TextoError"></label>
-                        <input type="submit" name="registrar" value="Enviar" class="contenedor-boton-agregar">
+                        <input type="submit" name="registrar" value="REGISTRAR" class="contenedor-boton-agregar">
                     
                     </form>
 
@@ -128,7 +168,7 @@
               
                     <h2>Editar Usuario</h2>
 
-                    <form onsubmit="enviar_ajax2(); return false" id="form2"  class="campos">
+                    <form onsubmit="editar_ajax(); return false" id="form2"  class="campos">
                         <label for="username">Usuario</label><br>
                         <input type="text" name="username" placeholder="Angel Genis"><br>
 
@@ -139,26 +179,23 @@
                         <p>Datos del nuevo usuario</p>
                         
                         <label for="name">Nombre</label><br>
-                        <input type="text" name="name" placeholder="Angel Genis"><br>
+                        <input type="text" name="name" id="Nombre" placeholder="Angel Genis"><br>
 
                         <label for="email">Correo</label><br>
-                        <input type="text" name="email" placeholder="angel.genis98@gmail.com">
+                        <input type="text" name="email" id="Email" placeholder="angel.genis98@gmail.com">
                         <br>
 
                         <label for="phone">Telefono</label><br>
-                        <input type="text" name="phone" placeholder="7353645874"><br>
+                        <input type="text" name="phone" id="Phone" placeholder="7353645874"><br>
 
                         <label for="rol">Rol</label><br>
-                        <input type="text" name="rol" placeholder="Ventas"><br>
+                        <input type="text" name="rol" id="Rol" placeholder="Ventas"><br>
 
-                        <label for="passwordnu">Contraseña</label><br>
-                        <input type="password" name="passwordnu" placeholder="************"><br>
-
-                        <label for="passwordnu2">Repetir Contraseña</label><br>
+                        <label for="passwordnu2">Nueva Contraseña</label><br>
                         <input type="password" name="passwordnu2" placeholder="************"><br>
 
                         <label for="error" class="texto-error" id="TextoError2"></label>
-                        <input type="submit" name="registrar" value="Enviar" class="contenedor-boton-agregar">
+                        <input type="submit" name="editar" value="EDITAR" class="contenedor-boton-agregar">
                     
                     </form>
 
@@ -235,7 +272,7 @@
             </div>
             
 
-            <div class="layout">
+            <div class="layout" id="Layout">
                 <?php
                 
                     // GETUSERS
@@ -266,12 +303,12 @@
                                 <div class="header-tarjeta">
                                     <p class="nombre"><?php echo $value['nombre']?></p>
                                     
-                                    <div class="lapiz">
+                                    <div class="lapiz" onClick="getData('<?php echo $value['nombre']?>, <?php echo $value['correo']?>, <?php echo $value['telefono']?>, <?php echo $value['rol']?>')">
                                         <!-- <a href="#updateUserInfo.php?id=<?php echo $value['nombre']?>" >
                                             <img src="./images/lapizIcon.svg" alt="lapiz">
                                         </a> -->
 
-                                        <img id="Lapiz" src="./images/lapizIcon.svg" alt="lapiz">
+                                        <img class="lapizicon" src="./images/lapizIcon.svg" alt="lapiz">
                                     </div>
                                 </div>
                                 <div class="body-tarjeta">
