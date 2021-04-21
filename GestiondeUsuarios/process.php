@@ -44,6 +44,7 @@
 
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $username2 = $_POST['username2'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -56,13 +57,13 @@
     if (empty($username) || empty($password) || empty($name) || empty($email) || empty($phone) || empty($rol) || empty($newPass)) {
         echo 'error, 500, No puede haber campos vacios';
     }else{
-        $respSetUser = $conn->setUser($username, $password, $name, $newPass);
+        $respSetUser = $conn->setUser($username, $password, $username2, $newPass);
         $respuestasu = json_encode($respSetUser);
         $parsed_jsonsu = json_decode($respuestasu, true);
 
         
         $nuevoUserInfo = new UserInfo($email, $name, $rol, $phone);
-        $respSetUserInfo = $conn->setUserInfo($username, $password, $name, $nuevoUserInfo);
+        $respSetUserInfo = $conn->setUserInfo($username, $password, $username2, $nuevoUserInfo);
 
         // $nuevoUserInfo = new UserInfo("aaa@doe.com", "aaa 2", "rh", "2281004088"); 
         // $respSetUserInfo = $conn->setUserInfo("pruebas3", "12345678c", "prueba5", $nuevoUserInfo);

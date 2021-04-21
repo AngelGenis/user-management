@@ -13,6 +13,23 @@
 
    require_once '../RecursosHumanos_PHP/RHConnection.php';
    
+   class User {
+        private $username;
+        private $contraseña;
+
+        public function __construct(string $username = "", string $contraseña = "") {
+        $this->username = $username;
+        $this->contraseña = $contraseña;
+        }
+        
+        public function getUsername() {
+        return $this->username;
+        }
+        public function getContraseña() {
+        return $this->contraseña;
+        }
+
+    }
    $conn = new RHConnection("https://localhost:44386");
 
                 
@@ -21,7 +38,12 @@
     $respuesta = json_encode($usersInfo);
     $parsed_json = json_decode($respuesta, true);
 
-    if($parsed_json['status'] == "Success"){
+    $users = $conn->getUsers();
+    
+
+    $i = 0;
+  
+    if($parsed_json['status'] == "Success" && $users->status == "Success"){
         ?>
             <!-- <div class="toast success">
                 <div class="toast-header">
@@ -36,14 +58,20 @@
                 </div>
             </div> -->
         <?php
-            foreach($parsed_json['data'] as $value) {      
+        //   foreach($users->data as &$user){
+        //     echo($user->getUsername());
+        // }
+    
+            foreach($parsed_json['data'] as $value) {  
+                $username2 = $users->data[$i]->getUsername();
+                
         ?>
 
         <div class="tarjeta">
                 <div class="header-tarjeta">
                     <p class="nombre"><?php echo $value['nombre']?></p>
                     
-                    <div class="lapiz" onClick="getData('<?php echo $value['nombre']?>, <?php echo $value['correo']?>, <?php echo $value['telefono']?>, <?php echo $value['rol']?>')">
+                    <div class="lapiz" onClick="getData('<?php echo $value['nombre']?>, <?php echo $value['correo']?>, <?php echo $value['telefono']?>, <?php echo $value['rol']?>, <?php echo $username2?>')">
                         <!-- <a href="#updateUserInfo.php?id=<?php echo $value['nombre']?>" >
                             <img src="./images/lapizIcon.svg" alt="lapiz">
                         </a> -->
@@ -73,6 +101,7 @@
                 
             </div> 
         <?php 
+        $i++;
         } //Cierre del For
     }else{
         ?>

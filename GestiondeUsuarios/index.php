@@ -149,6 +149,9 @@
                         <input type="password" name="password" placeholder="***********">
                         <br>
                         <p>Datos del nuevo usuario</p>
+                        <label for="username2">Nombre de usuario</label><br>
+                        <input type="text" name="username2" placeholder="AngelGenis98"><br>
+
                         <label for="name">Nombre</label><br>
                         <input type="text" name="name" placeholder="Angel Genis"><br>
                         <label for="email">Correo</label><br>
@@ -190,6 +193,9 @@
 
                         <p>Datos del nuevo usuario</p>
                         
+                        <label for="userName2">Nombre de usuario</label><br>
+                        <input type="text" name="userName2" id="UserName2" readonly placeholder="AngelGenis98"><br>
+
                         <label for="name">Nombre</label><br>
                         <input type="text" name="name" id="Nombre" placeholder="Angel Genis"><br>
 

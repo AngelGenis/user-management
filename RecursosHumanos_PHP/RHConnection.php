@@ -162,7 +162,7 @@
     
 
   }
-  // $conn = new RHConnection("https://localhost:44386");
+  $conn = new RHConnection("https://localhost:44386");
 
   // GETUSERSINFO
   // $usersInfo = $conn->getUsersInfo();

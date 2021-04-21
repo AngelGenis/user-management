@@ -31,13 +31,16 @@ function getData($data){
     $email = variables[1];
     $phone=variables[2];
     $rol = variables[3];
+    $username = variables[4];
 
     $('#Editar').css('display', 'flex');
 
+    $('#UserName').val($nombre);
     $('#Nombre').val($nombre);
     $('#Email').val($email);
     $('#Phone').val($phone);
     $('#Rol').val($rol);
+    $('#UserName2').val($username);
 
 }
 

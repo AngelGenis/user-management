@@ -43,6 +43,7 @@
 
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $username2 = $_POST['userName2'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -53,17 +54,17 @@
         echo 'error, 500, Debe Identificarse Primero';
     }else{
         if(!empty($newPass)){
-            $resp = $conn->updateUser($username, $password, $name, $name, $newPass);
+            $resp = $conn->updateUser($username, $password, $username2, $username2, $newPass);
             if($resp->status != "Success"){
                 echo $resp->status.", ". $resp->code.", ".$resp->message; 
             }else{
                 $nuevoUserInfo = new UserInfo($email,$name,$rol,$phone); 
-                $respEditarUserInfo = $conn->updateUserInfo($username, $password, $name, $nuevoUserInfo);
+                $respEditarUserInfo = $conn->updateUserInfo($username, $password, $username2, $nuevoUserInfo);
                 echo $respEditarUserInfo->status.", ". $respEditarUserInfo->code.", ".$respEditarUserInfo->message;
             }
         }else{
             $nuevoUserInfo = new UserInfo($email,$name,$rol,$phone); 
-            $respEditarUserInfo = $conn->updateUserInfo($username, $password, $name, $nuevoUserInfo);
+            $respEditarUserInfo = $conn->updateUserInfo($username, $password, $username2, $nuevoUserInfo);
             echo $respEditarUserInfo->status.", ". $respEditarUserInfo->code.", ".$respEditarUserInfo->message;
         }        
     }
