@@ -22,7 +22,21 @@
     $parsed_json = json_decode($respuesta, true);
 
     if($parsed_json['status'] == "Success"){
-            foreach($parsed_json['data'] as $value) {
+        ?>
+            <!-- <div class="toast success">
+                <div class="toast-header">
+                    <p><?php echo $parsed_json['status']?></p>
+                    <div class="equis toast-equis" onclick="cerrarToast()">
+                        <img src="./images/equis.svg" alt="equis">
+                    </div>
+                </div>
+                <div class="toast-body">
+                    <p> codigo <?php echo $parsed_json['code']?></p>
+                    <p><?php echo $parsed_json['message']?></p>
+                </div>
+            </div> -->
+        <?php
+            foreach($parsed_json['data'] as $value) {      
         ?>
 
         <div class="tarjeta">
@@ -39,11 +53,11 @@
                 </div>
                 <div class="body-tarjeta">
                     <div class="campos2">
-                        <p>Correo</p>
-                        <p><?php echo $value['correo']?></p>
+                        <p class="resaltar">Correo</p>
+                        <p class="desvanecer"><?php echo $value['correo']?></p>
                     
-                        <p>Telefono</p>
-                        <p><?php echo $value['telefono']?></p>
+                        <p class="resaltar">Telefono</p>
+                        <p class="desvanecer"><?php echo $value['telefono']?></p>
                     </div>
                     
                 </div>
@@ -62,10 +76,10 @@
         } //Cierre del For
     }else{
         ?>
-            <div class="toast error" id="ToastDatos">
+            <div class="toast error">
                 <div class="toast-header">
                     <p><?php echo $parsed_json['status']?></p>
-                    <div class="equis toast-equis" id="ToastEquisDatos">
+                    <div class="equis toast-equis" onclick="cerrarToast()">
                         <img src="./images/equis.svg" alt="equis">
                     </div>
                 </div>
