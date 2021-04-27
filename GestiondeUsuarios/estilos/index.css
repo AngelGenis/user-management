@@ -625,6 +625,30 @@ body .contenedor-principal .body .body-body .layout {
   }
 }
 
+body .contenedor-principal .body .body-body .layout #ContenedorAzul {
+  position: absolute;
+  z-index: 999999999;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  display: none;
+  opacity: .5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .contenedor-principal .body .body-body .layout #ContenedorAzul img {
+  width: 100px;
+  height: 100px;
+}
+
 body .contenedor-principal .body .body-body .layout .tarjeta {
   width: 240px;
   height: 238px;

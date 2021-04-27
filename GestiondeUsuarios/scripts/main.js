@@ -48,9 +48,11 @@ function getData($data){
 function getTarjetas(){
     $.ajax({
         url: './getTarjetas.php',
-       
+        beforeSend: function() {
+            $("#ContenedorAzul").css('display','flex');
+        },
         success: function(respuesta){
-            
+            $("#ContenedorAzul").css('display','none');
             $('#Layout').html(respuesta);
         
         }

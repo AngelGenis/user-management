@@ -263,6 +263,7 @@
     </div>
 
     <div class="body">
+
         <div class="header-body">
             <div class="contenedor-buscador">
                 <input class="input" type="text" placeholder="Buscar por nombre de usuario">
@@ -278,6 +279,7 @@
             </div> -->
         </div>
         <div class="body-body">
+        
             <div class="contenedor-botones">
                 <p>USUARIOS</p>
                 <div class="contenedor-boton" id="BotonAgregar">
@@ -290,6 +292,9 @@
             
 
             <div class="layout" id="Layout">
+                <div id="ContenedorAzul">
+                <img src="./images/loading.gif"></img>
+                </div>
                     
             </div>
         </div>

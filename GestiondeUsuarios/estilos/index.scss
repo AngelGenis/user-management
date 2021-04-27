@@ -20,6 +20,7 @@ $negro: #4F4F4F;
     to {top: 50px}
 }
   
+
 .toast2{
     
     z-index: 99999;
@@ -211,11 +212,8 @@ body{
         height: 100vh;
         position: relative;
         overflow: hidden;
-        
 
-
-        
-
+    
         .contenedor-principal-login{
             width: 100%;
             height: 100vh;
@@ -410,6 +408,8 @@ body{
                 width: 100%;
                 height: 100%;
 
+               
+
                 .contenedor-botones{
                     width: 100%;
                     display: flex;
@@ -461,6 +461,25 @@ body{
                   
                     @media screen and (max-width: 750px){
                       grid-template-columns: 30% 30% 30%;
+                    }
+
+                    #ContenedorAzul{
+                        position: absolute;
+                        z-index: 999999999;
+                        width: 100%;
+                        height: 100vh;
+                        top: 0;
+                        display: none;
+                        opacity: .5;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        img{
+                            
+                            width: 100px;
+                            height: 100px;
+                        }
                     }
 
                     .tarjeta{
